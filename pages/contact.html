@@ -4,9 +4,131 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact — Nestly Houses</title>
+    <title>About — Nestly Houses</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/Nestly-Houses/css/style.css" />
+    <style>
+      .about-hero {
+        background: linear-gradient(135deg, #0071BC 0%, #005a96 100%);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+      }
+      .about-hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+      .about-hero p {
+        font-size: 16px;
+        opacity: 0.9;
+      }
+      .about-body {
+        padding: 80px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .mission-block {
+        display: flex;
+        gap: 60px;
+        align-items: center;
+        margin-bottom: 80px;
+      }
+      .mission-text {
+        flex: 1;
+      }
+      .mission-text h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+      }
+      .mission-text p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 16px;
+      }
+      .mission-image {
+        flex: 1;
+        background: #e8f4fd;
+        height: 300px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
+      }
+      .why-section {
+        margin-bottom: 80px;
+      }
+      .why-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        color: #1a1a1a;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+      }
+      .why-card {
+        background: white;
+        border-radius: 12px;
+        padding: 32px 24px;
+        text-align: center;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        transition: transform 0.2s;
+      }
+      .why-card:hover {
+        transform: translateY(-4px);
+      }
+      .why-icon {
+        font-size: 36px;
+        display: block;
+        margin-bottom: 16px;
+      }
+      .why-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+      }
+      .why-card p {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+      }
+      .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 24px;
+        background: linear-gradient(135deg, #0071BC 0%, #005a96 100%);
+        border-radius: 16px;
+        padding: 48px 32px;
+      }
+      .stat-item {
+        text-align: center;
+        color: white;
+      }
+      .stat-item h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .stat-item p {
+        font-size: 14px;
+        opacity: 0.85;
+      }
+      @media (max-width: 768px) {
+        .mission-block {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
   <body>
 
@@ -14,104 +136,85 @@
     <nav class="navbar">
       <div class="nav-container">
         <div class="nav-logo">
-            <img src="/Nestly-Houses/images/logo.png" alt="Nestly Logo" />
+          <img src="/Nestly-Houses/images/logo.png" alt="Nestly Logo" />
           <span>Nestly Houses</span>
         </div>
         <ul class="nav-links">
           <li><a href="/Nestly-Houses/index.html">Home</a></li>
           <li><a href="/Nestly-Houses/pages/listings.html">Listings</a></li>
-          <li><a href="/Nestly-Houses/pages/about.html">About</a></li>
-          <li><a href="/Nestly-Houses/pages/contact.html" class="active">Contact</a></li>
+          <li><a href="/Nestly-Houses/pages/about.html" class="active">About</a></li>
+          <li><a href="/Nestly-Houses/pages/contact.html">Contact</a></li>
         </ul>
       </div>
     </nav>
 
-    <!-- PAGE HEADER -->
-    <section class="page-header">
-      <div class="container">
-        <h1>Contact Us</h1>
-        <p>We'd love to hear from you</p>
-      </div>
+    <!-- HERO -->
+    <section class="about-hero">
+      <h1>About Nestly Houses</h1>
+      <p>Tanzania's trusted rental platform</p>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section class="contact-section">
-      <div class="container">
-        <div class="contact-grid">
+    <!-- ABOUT CONTENT -->
+    <div class="about-body">
 
-          <!-- Contact Form -->
-          <div class="contact-form-wrapper">
-            <h2>Send us a Message</h2>
-            <div class="contact-form">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="Your full name" />
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="your@email.com" />
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" placeholder="+255 700 000 000" />
-              </div>
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <select id="subject">
-                  <option value="">Select a subject</option>
-                  <option value="booking">Property Booking</option>
-                  <option value="listing">List My Property</option>
-                  <option value="support">General Support</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" rows="5" placeholder="Tell us how we can help you..."></textarea>
-              </div>
-              <button class="btn-submit" onclick="submitForm()">Send Message</button>
-              <p class="form-success" id="form-success">✅ Message sent! We'll get back to you shortly!</p>
-            </div>
+      <!-- Mission -->
+      <div class="mission-block">
+        <div class="mission-text">
+          <h2>Our Mission</h2>
+          <p>Nestly Houses was born from a simple idea — finding a rental home in Tanzania should be easy, transparent, and stress-free. We connect guests with verified rental properties across Dar es Salaam, Arusha, Mwanza, Zanzibar and beyond.</p>
+          <p>No middlemen. No confusion. Just browse, find your perfect home, and book directly.</p>
+        </div>
+        <div class="mission-image">🏡</div>
+      </div>
+
+      <!-- Why Nestly -->
+      <div class="why-section">
+        <h2>Why Choose Nestly Houses?</h2>
+        <div class="why-grid">
+          <div class="why-card">
+            <span class="why-icon">✅</span>
+            <h3>Verified Listings</h3>
+            <p>Every property on Nestly is verified to ensure what you see is what you get.</p>
           </div>
-
-          <!-- Contact Info -->
-          <div class="contact-info">
-            <h2>Get in Touch</h2>
-            <div class="info-cards">
-              <div class="info-card">
-                <span class="info-icon">📍</span>
-                <div>
-                  <h3>Our Location</h3>
-                  <p>Dar es Salaam, Tanzania</p>
-                </div>
-              </div>
-              <div class="info-card">
-                <span class="info-icon">📞</span>
-                <div>
-                  <h3>Phone</h3>
-                  <p>+255 693363601</p>
-                </div>
-              </div>
-              <div class="info-card">
-                <span class="info-icon">📧</span>
-                <div>
-                  <h3>Email</h3>
-                  <p>nestlyhouses@gmail.com</p>
-                </div>
-              </div>
-              <div class="info-card">
-                <span class="info-icon">🕒</span>
-                <div>
-                  <h3>Working Hours</h3>
-                  <p>Mon – Sat: 8am to 6pm</p>
-                </div>
-              </div>
-            </div>
+          <div class="why-card">
+            <span class="why-icon">📍</span>
+            <h3>Tanzania Focused</h3>
+            <p>Built specifically for Tanzania — we understand the local rental market inside out.</p>
           </div>
-
+          <div class="why-card">
+            <span class="why-icon">💬</span>
+            <h3>Direct Booking</h3>
+            <p>Book directly with no hidden fees or complicated processes.</p>
+          </div>
+          <div class="why-card">
+            <span class="why-icon">🔒</span>
+            <h3>Safe & Secure</h3>
+            <p>Your privacy and security matter to us at every step of your journey.</p>
+          </div>
         </div>
       </div>
-    </section>
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>Properties Listed</p>
+        </div>
+        <div class="stat-item">
+          <h3>4</h3>
+          <p>Cities Covered</p>
+        </div>
+        <div class="stat-item">
+          <h3>1000+</h3>
+          <p>Happy Guests</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Verified Listings</p>
+        </div>
+      </div>
+
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -120,6 +223,6 @@
       </div>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="/Nestly-Houses/js/main.js"></script>
   </body>
 </html>
