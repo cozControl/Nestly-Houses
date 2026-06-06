@@ -53,6 +53,16 @@
     font-family: 'Playfair Display', serif;
   }
   
+  .nav-logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  
+  .nav-logo a span {
+    color: #0071BC;
+  }
   .nav-links {
     list-style: none;
     display: flex;
