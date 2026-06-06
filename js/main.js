@@ -1,4 +1,22 @@
 // ===== NESTLY SEARCH & FILTER =====
+// ====== HAMBURGER MENU ======
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+}
 
 const searchInput = document.getElementById('search-input');
 const cityFilter = document.getElementById('city-filter');
