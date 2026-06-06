@@ -685,4 +685,16 @@
     color: #0071BC;
   }
 }
+
+.navbar {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
   }
