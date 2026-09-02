@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ListingsBrowser from "@/components/ListingsBrowser";
 import { properties } from "@/lib/properties";
 
@@ -8,7 +9,9 @@ export default function ListingsPage() {
         <h1 className="mb-2 font-heading text-3xl font-bold md:text-4xl">All Properties</h1>
         <p className="text-base opacity-90">Find your perfect rental home across Tanzania</p>
       </section>
-      <ListingsBrowser properties={properties} />
+      <Suspense>
+        <ListingsBrowser properties={properties} />
+      </Suspense>
     </>
   );
 }
