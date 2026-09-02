@@ -6,7 +6,13 @@ export default function PropertyCard({ property }: { property: Property }) {
     <div className="overflow-hidden rounded-xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,113,188,0.15)]">
       <div className="relative flex h-[200px] items-start bg-gradient-to-br from-[#cce4f6] to-[#a8d1f0] p-3">
         {property.image && (
-          <Image src={property.image} alt={property.name} fill className="object-cover" />
+          <Image
+            src={property.image}
+            alt={property.name}
+            fill
+            sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
         )}
         <span className="relative rounded-full bg-brand px-3 py-1 text-xs font-semibold text-white">
           Available
