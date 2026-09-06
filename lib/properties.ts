@@ -4,7 +4,7 @@ export type Property = {
   slug: string;
   name: string;
   location: string;
-  city: "dar es salaam" | "arusha" | "mwanza" | "zanzibar";
+  city: "dar es salaam" | "arusha" | "mwanza" | "zanzibar" | "dodoma";
   beds: number;
   baths: number;
   size: string;

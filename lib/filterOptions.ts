@@ -6,6 +6,7 @@ export const cityOptions: { value: Property["city"] | ""; label: string }[] = [
   { value: "arusha", label: "Arusha" },
   { value: "mwanza", label: "Mwanza" },
   { value: "zanzibar", label: "Zanzibar" },
+  { value: "dodoma", label: "Dodoma" },
 ];
 
 export const bedsOptions = [

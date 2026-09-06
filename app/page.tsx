@@ -10,6 +10,7 @@ const cities = [
   { label: "Arusha", value: "arusha" },
   { label: "Zanzibar", value: "zanzibar" },
   { label: "Mwanza", value: "mwanza" },
+  { label: "Dodoma", value: "dodoma", image: `${BASE_PATH}/images/property4.jpg` },
 ];
 
 export default function HomePage() {
