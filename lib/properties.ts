@@ -1,10 +1,11 @@
 import { BASE_PATH } from "@/lib/basePath";
+import { supabase } from "@/lib/supabaseClient";
 
 export type Property = {
   slug: string;
   name: string;
   location: string;
-  city: "dar es salaam" | "arusha" | "mwanza" | "zanzibar" | "dodoma";
+  city: string;
   beds: number;
   baths: number;
   size: string;
@@ -15,92 +16,55 @@ export type Property = {
   image?: string;
 };
 
-export const properties: Property[] = [
-  {
-    slug: "modern-apartment-masaki",
-    name: "Modern Apartment in Masaki",
-    location: "Masaki, Dar es Salaam",
-    city: "dar es salaam",
-    beds: 3,
-    baths: 2,
-    size: "120m²",
-    price: 1200000,
-    priceLabel: "TZS 1,200,000 / mo",
-    amenities: ["WiFi", "Parking", "Security"],
-    description:
-      "A modern three-bedroom apartment in Masaki, one of Dar es Salaam's leafier residential neighborhoods. Two bathrooms and 120m² of living space, with on-site parking, security, and WiFi included.",
-    image: `${BASE_PATH}/images/property1.jpg`,
-  },
-  {
-    slug: "cozy-studio-mikocheni",
-    name: "Cozy Studio in Mikocheni",
-    location: "Mikocheni, Dar es Salaam",
-    city: "dar es salaam",
-    beds: 1,
-    baths: 1,
-    size: "45m²",
-    price: 450000,
-    priceLabel: "TZS 450,000 / mo",
-    amenities: ["WiFi", "Water"],
-    description:
-      "A compact 45m² studio in Mikocheni, well suited to a single tenant or couple. Water and WiFi are included in the listed rent.",
-    image: `${BASE_PATH}/images/property2.jpg`,
-  },
-  {
-    slug: "spacious-villa-mbezi-beach",
-    name: "Spacious Villa in Mbezi Beach",
-    location: "Mbezi Beach, Dar es Salaam",
-    city: "dar es salaam",
-    beds: 4,
-    baths: 3,
-    size: "250m²",
-    price: 3500000,
-    priceLabel: "TZS 3,500,000 / mo",
-    amenities: ["Pool", "Parking", "Generator"],
-    description:
-      "A four-bedroom, three-bathroom villa near Mbezi Beach, with 250m² of space, a private pool, on-site parking, and a backup generator.",
-    image: `${BASE_PATH}/images/property3.jpg`,
-  },
-  {
-    slug: "modern-flat-arusha-cbd",
-    name: "Modern Flat in Arusha CBD",
-    location: "CBD, Arusha",
-    city: "arusha",
-    beds: 2,
-    baths: 1,
-    size: "80m²",
-    price: 800000,
-    priceLabel: "TZS 800,000 / mo",
-    amenities: ["WiFi", "Security"],
-    description:
-      "A two-bedroom flat in the heart of Arusha's CBD, 80m² with one bathroom, WiFi, and on-site security — close to shops and services.",
-  },
-  {
-    slug: "beachfront-apartment-zanzibar",
-    name: "Beachfront Apartment in Zanzibar",
-    location: "Nungwi, Zanzibar",
-    city: "zanzibar",
-    beds: 2,
-    baths: 2,
-    size: "95m²",
-    price: 1500000,
-    priceLabel: "TZS 1,500,000 / mo",
-    amenities: ["Beach Access", "WiFi"],
-    description:
-      "A two-bedroom, two-bathroom apartment in Nungwi, Zanzibar, with direct beach access. 95m² of living space with WiFi included.",
-  },
-  {
-    slug: "lake-view-home-mwanza",
-    name: "Lake View Home in Mwanza",
-    location: "Capri Point, Mwanza",
-    city: "mwanza",
-    beds: 3,
-    baths: 2,
-    size: "140m²",
-    price: 900000,
-    priceLabel: "TZS 900,000 / mo",
-    amenities: ["Lake View", "Parking", "Garden"],
-    description:
-      "A three-bedroom home on Capri Point, Mwanza, with views of Lake Victoria. 140m² of space, two bathrooms, a garden, and on-site parking.",
-  },
-];
+type PropertyRow = {
+  slug: string;
+  name: string;
+  location: string;
+  city: string;
+  beds: number;
+  baths: number;
+  size: string;
+  price: number;
+  price_label: string;
+  amenities: string[] | null;
+  description: string | null;
+  image: string | null;
+};
+
+function mapRow(row: PropertyRow): Property {
+  return {
+    slug: row.slug,
+    name: row.name,
+    location: row.location,
+    city: row.city,
+    beds: row.beds,
+    baths: row.baths,
+    size: row.size,
+    price: row.price,
+    priceLabel: row.price_label,
+    amenities: row.amenities ?? [],
+    description: row.description ?? "",
+    image: row.image ? `${BASE_PATH}/images/${row.image}` : undefined,
+  };
+}
+
+export async function fetchProperties(): Promise<Property[]> {
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .order("created_at", { ascending: true });
+
+  if (error) throw error;
+  return (data ?? []).map(mapRow);
+}
+
+export async function fetchPropertyBySlug(slug: string): Promise<Property | null> {
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data ? mapRow(data) : null;
+}

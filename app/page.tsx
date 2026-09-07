@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroSearch from "@/components/HeroSearch";
-import PropertyCard from "@/components/PropertyCard";
-import { properties } from "@/lib/properties";
+import FeaturedProperties from "@/components/FeaturedProperties";
 import { BASE_PATH } from "@/lib/basePath";
 
 const cities = [
@@ -14,8 +13,6 @@ const cities = [
 ];
 
 export default function HomePage() {
-  const featured = properties.slice(0, 3);
-
   return (
     <>
       <section className="relative flex min-h-[560px] items-center justify-center overflow-hidden px-5 py-24 text-center">
@@ -68,11 +65,7 @@ export default function HomePage() {
           <h2 className="mb-10 text-center font-heading text-3xl font-bold text-[#1a1a1a]">
             Featured Properties
           </h2>
-          <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((property) => (
-              <PropertyCard key={property.slug} property={property} />
-            ))}
-          </div>
+          <FeaturedProperties />
         </div>
       </section>
 

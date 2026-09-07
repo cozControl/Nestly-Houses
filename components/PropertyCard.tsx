@@ -39,7 +39,7 @@ export default function PropertyCard({ property }: { property: Property }) {
         <div className="flex items-center justify-between border-t border-[#f0f0f0] pt-4">
           <span className="text-[15px] font-bold text-brand">{property.priceLabel}</span>
           <Link
-            href={`/listings/${property.slug}`}
+            href={`/listings/property?slug=${encodeURIComponent(property.slug)}`}
             className="rounded-md bg-brand px-5 py-2.5 text-sm font-medium text-white transition hover:bg-brand-dark"
           >
             View Details

@@ -1,21 +1,29 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import PropertyCard from "@/components/PropertyCard";
-import type { Property } from "@/lib/properties";
+import { fetchProperties, type Property } from "@/lib/properties";
 import { cityOptions, bedsOptions, priceOptions } from "@/lib/filterOptions";
 
-export default function ListingsBrowser({ properties }: { properties: Property[] }) {
+export default function ListingsBrowser() {
   const params = useSearchParams();
+  const [properties, setProperties] = useState<Property[] | null>(null);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [search, setSearch] = useState("");
   const [city, setCity] = useState(params.get("city") ?? "");
   const [beds, setBeds] = useState(params.get("beds") ?? "");
   const [maxPrice, setMaxPrice] = useState("");
 
+  useEffect(() => {
+    fetchProperties()
+      .then(setProperties)
+      .catch(() => setLoadFailed(true));
+  }, []);
+
   const filtered = useMemo(() => {
     const term = search.toLowerCase();
-    return properties.filter((property) => {
+    return (properties ?? []).filter((property) => {
       const matchesSearch =
         term === "" ||
         property.name.toLowerCase().includes(term) ||
@@ -77,19 +85,29 @@ export default function ListingsBrowser({ properties }: { properties: Property[]
 
       <section className="px-5 py-10">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-6 text-sm text-[#666]">
-            Showing {filtered.length} propert{filtered.length === 1 ? "y" : "ies"}
-          </p>
-          {filtered.length === 0 ? (
+          {loadFailed ? (
             <p className="py-16 text-center text-base text-[#999]">
-              No properties found. Try adjusting your filters.
+              Couldn&apos;t load listings right now. Please try again shortly.
             </p>
+          ) : properties === null ? (
+            <p className="py-16 text-center text-base text-[#999]">Loading properties…</p>
           ) : (
-            <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((property) => (
-                <PropertyCard key={property.slug} property={property} />
-              ))}
-            </div>
+            <>
+              <p className="mb-6 text-sm text-[#666]">
+                Showing {filtered.length} propert{filtered.length === 1 ? "y" : "ies"}
+              </p>
+              {filtered.length === 0 ? (
+                <p className="py-16 text-center text-base text-[#999]">
+                  No properties found. Try adjusting your filters.
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+                  {filtered.map((property) => (
+                    <PropertyCard key={property.slug} property={property} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
