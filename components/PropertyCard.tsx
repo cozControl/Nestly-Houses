@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Property } from "@/lib/properties";
 
 export default function PropertyCard({ property }: { property: Property }) {
@@ -37,12 +38,12 @@ export default function PropertyCard({ property }: { property: Property }) {
         )}
         <div className="flex items-center justify-between border-t border-[#f0f0f0] pt-4">
           <span className="text-[15px] font-bold text-brand">{property.priceLabel}</span>
-          <a
-            href="#"
+          <Link
+            href={`/listings/${property.slug}`}
             className="rounded-md bg-brand px-5 py-2.5 text-sm font-medium text-white transition hover:bg-brand-dark"
           >
             View Details
-          </a>
+          </Link>
         </div>
       </div>
     </div>
